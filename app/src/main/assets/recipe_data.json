@@ -1,0 +1,43 @@
+{
+  "data": [
+    {
+      "uuid": "4c8e4f05-eb22-4edd-9ec3-b7671b144c63",
+      "name": "Chicken",
+      "details": [
+        {
+          "uuid": "d2e24d43-884a-4c35-9937-c4bb334f951c",
+          "menu": "Kaldereta",
+          "description": "Kaldereta or caldereta is a goat meat stew from the Philippines. Variations of the dish use beef, chicken or pork. Commonly the goat meat is stewed with vegetables and a liver paste. Vegetables may include tomatoes, potatoes, olives, bell peppers and hot peppers; kaldereta sometimes includes tomato sauce.",
+          "country": "Philippines",
+          "ingredients": [
+            {
+              "uuid": "8efefb15-d5ed-478e-b73e-f8d9017e9b62",
+              "value": "2 lbs. Chicken cubed"
+            },
+            {
+              "uuid": "065a5939-f585-4ddf-8265-71ad77fd5b52",
+              "value": "1 15 oz. can tomato sauce"
+            }
+          ],
+          "steps": [
+            {
+              "uuid": "346a5336-ab8e-4471-8bb0-7eeb6a8d08da",
+              "number": 1,
+              "value": "Heat the oil in a cooking pot."
+            },
+            {
+              "uuid": "efe842a7-f56d-4c15-9018-bd0d84c6290b",
+              "number": 2,
+              "value": "Once the oil is hot, saute the garlic and onion."
+            },
+            {
+              "uuid": "cc703422-0c81-4321-8f48-213c4a97f30e",
+              "number": 3,
+              "value": "Add the chicken. Stir and cook for for 5 minutes or until the color turns light to medium brown."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
