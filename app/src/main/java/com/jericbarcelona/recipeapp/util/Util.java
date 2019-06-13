@@ -180,6 +180,7 @@ public class Util {
                             recipeStepsItem.setUuid(stepsUuid);
                             recipeStepsItem.setValue(stepsValue);
                             recipeStepsItem.setNumber(stepsNumber);
+                            recipeStepsItem.setDetailsUuid(recipeDetailsUuid);
 
                             recipeStepsItem.setCreatedAt(new Date());
                             recipeStepsItem.setUpdatedAt(new Date());
@@ -190,6 +191,7 @@ public class Util {
 
                             recipeStepsItem.setValue(stepsValue);
                             recipeStepsItem.setNumber(stepsNumber);
+                            recipeStepsItem.setDetailsUuid(recipeDetailsUuid);
 
                             recipeStepsItem.setUpdatedAt(new Date());
 

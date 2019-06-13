@@ -64,19 +64,17 @@
                 android:layout_width="150dp"
                 android:layout_height="150dp"
                 android:layout_gravity="center"
-                android:layout_weight="20"
                 android:src="@drawable/defaultrecipe" />
 
             <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="10"
                 android:layout_marginTop="20dp">
 
                 <EditText
                     android:id="@+id/editTextRecipeType"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="50dp"
                     android:background="@drawable/shape_sharp_corners_lightgray"
                     android:hint="Recipe Type"
                     android:inputType="textCapWords"
@@ -91,13 +89,12 @@
             <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="10"
                 android:layout_marginTop="20dp">
 
                 <EditText
                     android:id="@+id/editTextRecipeName"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="50dp"
                     android:background="@drawable/shape_sharp_corners_lightgray"
                     android:hint="Recipe Name"
                     android:inputType="textCapWords"
@@ -112,13 +109,12 @@
             <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="20"
                 android:layout_marginTop="20dp">
 
                 <EditText
                     android:id="@+id/editTextDescription"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="50dp"
                     android:background="@drawable/shape_sharp_corners_lightgray"
                     android:hint="Recipe Description"
                     android:inputType="textMultiLine"

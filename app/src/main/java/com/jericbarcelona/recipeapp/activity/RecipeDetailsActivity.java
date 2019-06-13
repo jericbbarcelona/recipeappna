@@ -1,9 +1,13 @@
 package com.jericbarcelona.recipeapp.activity;
 
+import android.app.Activity;
 import android.app.Dialog;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.net.Uri;
+import android.provider.MediaStore;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -30,6 +34,9 @@ public class RecipeDetailsActivity extends AppCompatActivity {
     private LinearLayout linearLayoutRecipeDetails;
     private FloatingActionButton floatingButtonAddRecipeDetails;
     private CropImageView imageViewRecipeCrop;
+    private Bitmap cropped;
+    private String typeUuid = "";
+    private String recipeType = "";
 
     private void initializeView() {
         linearLayoutRecipeDetails = (LinearLayout) findViewById(R.id.linearLayoutRecipeDetails);
@@ -53,14 +60,14 @@ public class RecipeDetailsActivity extends AppCompatActivity {
         initializeView();
 
         Bundle extras = getIntent().getExtras();
-        String typeUuid = extras.getString("type_uuid");
-        String recipeType = extras.getString("recipe_type");
+        typeUuid = extras.getString("type_uuid");
+        recipeType = extras.getString("recipe_type");
 
         getSupportActionBar().setTitle(recipeType + " Recipes");
 
         DaoSession daoSession = Util.getDaoSession(this);
         List<RecipeDetails> recipeDetailsList = daoSession.getRecipeDetailsDao().queryBuilder().list(); //daoSession.getRecipeDetailsDao().queryBuilder().where(RecipeDetailsDao.Properties.TypeUuid.eq(typeUuid)).list();
-        if(!recipeDetailsList.isEmpty()) {
+        if (!recipeDetailsList.isEmpty()) {
             initRecipeDetailsByType(linearLayoutRecipeDetails, recipeDetailsList);
         } else {
             Toast.makeText(this, "No " + recipeType + " recipe at this moment.", Toast.LENGTH_LONG).show();
@@ -77,7 +84,15 @@ public class RecipeDetailsActivity extends AppCompatActivity {
                 dialogBuilder.setCancelable(false);
                 dialogBuilder.show();
 
-                ImageView imageViewRecipe = dialogBuilder.findViewById(R.id.imageViewRecipe);
+                final ImageView imageViewRecipe = dialogBuilder.findViewById(R.id.imageViewRecipe);
+                ImageView imageViewClose = dialogBuilder.findViewById(R.id.imageButtonClose);
+
+                imageViewClose.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        dialogBuilder.dismiss();
+                    }
+                });
 
                 imageViewRecipe.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -93,15 +108,71 @@ public class RecipeDetailsActivity extends AppCompatActivity {
 
                         imageViewRecipeCrop = recipeImageDialog.findViewById(R.id.profilePictureCropImageView);
                         Button buttonCropImage = recipeImageDialog.findViewById(R.id.buttonCropImage);
+
+                        buttonCropImage.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                cropped = imageViewRecipeCrop.getCroppedImage(500, 500);
+                                if (cropped != null) {
+                                    imageViewRecipe.setImageBitmap(cropped);
+                                    /*try {
+                                        File photoDir = new File(AppConstants.PROFILE_PICTURE_EXTERNAL_STORAGE);
+                                        if (!photoDir.exists()) {
+                                            photoDir.mkdirs();
+                                        }
+                                    } catch (SecurityException se) {
+                                        Log.e("Create Folder", se.toString());
+                                    }
+                                    String fileName = customerId + ".jpg";
+                                    File file = new File(AppConstants.PROFILE_PICTURE_EXTERNAL_STORAGE, fileName);
+                                    try {
+                                        FileOutputStream out = new FileOutputStream(file);
+                                        cropped.compress(Bitmap.CompressFormat.JPEG, 20, out);
+                                        out.flush();
+                                        out.close();
+
+                                        List<WACustomer> waCustomerList = daoSession.getWACustomerDao().queryBuilder().where(WACustomerDao.Properties.CustomerId.eq(customerId)).list();
+                                        if (!waCustomerList.isEmpty()) {
+                                            WACustomer waCustomer = waCustomerList.get(0);
+                                            waCustomer.setProfilePicPath(file.getName());
+                                            daoSession.getWACustomerDao().update(waCustomer);
+                                        }
+                                    } catch (Exception e) {
+                                        e.printStackTrace();
+                                    }*/
+                                    recipeImageDialog.cancel();
+                                }
+                            }
+                        });
+
                     }
                 });
             }
         });
     }
 
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (resultCode == Activity.RESULT_OK) {
+            Uri imageUri = getPickImageResultUri(data, RecipeDetailsActivity.this);
+            imageViewRecipeCrop.setImageUriAsync(imageUri);
+            imageViewRecipeCrop.setFixedAspectRatio(true);
+            imageViewRecipeCrop.setAspectRatio(180, 180);
+        }
+    }
+
+    public Uri getPickImageResultUri(Intent data, Context context) {
+        boolean isCamera = true;
+        if (data != null) {
+            String action = data.getAction();
+            isCamera = action != null && action.equals(MediaStore.ACTION_IMAGE_CAPTURE);
+        }
+        return isCamera ? Util.getCaptureImageOutputUri(context) : data.getData();
+    }
+
     private void initRecipeDetailsByType(LinearLayout linearLayout, List<RecipeDetails> recipeDetails) {
         linearLayout.removeAllViews();
-        for(RecipeDetails recipeDetailsItem : recipeDetails) {
+        for (final RecipeDetails recipeDetailsItem : recipeDetails) {
             LinearLayout linearLayoutItem = (LinearLayout) getLayoutInflater().inflate(R.layout.recipe_details_item, null);
 
             ImageButton imageViewTypeImage = linearLayoutItem.findViewById(R.id.imageViewTypeImage);
@@ -113,6 +184,20 @@ public class RecipeDetailsActivity extends AppCompatActivity {
 
             Bitmap placeholder = BitmapFactory.decodeResource(getResources(), R.drawable.beef);
             imageViewTypeImage.setImageBitmap(placeholder);
+
+            imageViewTypeImage.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent intent = new Intent(RecipeDetailsActivity.this, RecipeChosenDetailsActivity.class);
+                    Bundle routeInfoBundle = new Bundle();
+                    routeInfoBundle.putString("details_uuid", recipeDetailsItem.getUuid());
+                    routeInfoBundle.putString("details_name", recipeDetailsItem.getName());
+                    routeInfoBundle.putString("type_uuid", typeUuid);
+                    routeInfoBundle.putString("recipe_type", recipeType);
+                    intent.putExtras(routeInfoBundle);
+                    startActivity(intent);
+                }
+            });
 
 //            File recipeTypeImageFile = new File(AppConstants.EXTERNAL_STORAGE, recipeDetailsItem.getImageLocation());
 //            if (recipeTypeImageFile.exists()) {
