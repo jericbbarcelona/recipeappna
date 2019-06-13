@@ -22,6 +22,7 @@ public class RecipeIngredients {
     private Date createdAt;
     private Date updatedAt;
     private Date deletedAt;
+
     @Generated(hash = 1255016904)
     public RecipeIngredients(Long id, @NotNull String uuid, String detailsUuid,
             String value, Date createdAt, Date updatedAt, Date deletedAt) {

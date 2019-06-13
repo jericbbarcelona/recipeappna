@@ -6,9 +6,10 @@
       "details": [
         {
           "uuid": "d2e24d43-884a-4c35-9937-c4bb334f951c",
-          "menu": "Kaldereta",
+          "name": "Kaldereta",
           "description": "Kaldereta or caldereta is a goat meat stew from the Philippines. Variations of the dish use beef, chicken or pork. Commonly the goat meat is stewed with vegetables and a liver paste. Vegetables may include tomatoes, potatoes, olives, bell peppers and hot peppers; kaldereta sometimes includes tomato sauce.",
           "country": "Philippines",
+          "image_location": "/recipe_app/kaldereta.jpeg",
           "ingredients": [
             {
               "uuid": "8efefb15-d5ed-478e-b73e-f8d9017e9b62",

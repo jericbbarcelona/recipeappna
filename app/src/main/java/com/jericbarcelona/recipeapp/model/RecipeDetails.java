@@ -20,21 +20,23 @@ public class RecipeDetails {
     private String name;
     private String description;
     private String country;
+    private String imageLocation;
 
     private Date createdAt;
     private Date updatedAt;
     private Date deletedAt;
 
-    @Generated(hash = 983722568)
+    @Generated(hash = 1101001037)
     public RecipeDetails(Long id, @NotNull String uuid, String typeUuid,
-            String name, String description, String country, Date createdAt,
-            Date updatedAt, Date deletedAt) {
+            String name, String description, String country, String imageLocation,
+            Date createdAt, Date updatedAt, Date deletedAt) {
         this.id = id;
         this.uuid = uuid;
         this.typeUuid = typeUuid;
         this.name = name;
         this.description = description;
         this.country = country;
+        this.imageLocation = imageLocation;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
         this.deletedAt = deletedAt;
@@ -95,6 +97,12 @@ public class RecipeDetails {
     }
     public void setCountry(String country) {
         this.country = country;
+    }
+    public String getImageLocation() {
+        return this.imageLocation;
+    }
+    public void setImageLocation(String imageLocation) {
+        this.imageLocation = imageLocation;
     }
 
 
