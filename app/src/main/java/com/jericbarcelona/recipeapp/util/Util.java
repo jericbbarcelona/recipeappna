@@ -96,7 +96,7 @@ public class Util {
                     recipeType.setImageLocation(recipeTypeImageLocation);
                     recipeType.setUpdatedAt(new Date());
 
-                    daoSession.getRecipeTypeDao().update(recipeType);
+//                    daoSession.getRecipeTypeDao().update(recipeType);
                 }
 
                 JSONArray jsonArrayRecipeDetails = jsonRecipeTypeItem.getJSONArray("details");
@@ -134,7 +134,7 @@ public class Util {
 
                         recipeDetailsItem.setUpdatedAt(new Date());
 
-                        daoSession.getRecipeDetailsDao().update(recipeDetailsItem);
+//                        daoSession.getRecipeDetailsDao().update(recipeDetailsItem);
                     }
 
                     JSONArray jsonArrayIngredients = jsonObjectRecipeDetailsItem.getJSONArray("ingredients");
@@ -162,7 +162,7 @@ public class Util {
 
                             recipeIngredientsItem.setUpdatedAt(new Date());
 
-                            daoSession.getRecipeIngredientsDao().update(recipeIngredientsItem);
+//                            daoSession.getRecipeIngredientsDao().update(recipeIngredientsItem);
                         }
                     }
 
@@ -195,7 +195,7 @@ public class Util {
 
                             recipeStepsItem.setUpdatedAt(new Date());
 
-                            daoSession.getRecipeStepsDao().update(recipeStepsItem);
+//                            daoSession.getRecipeStepsDao().update(recipeStepsItem);
                         }
                     }
                 }

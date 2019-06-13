@@ -45,7 +45,7 @@
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"
                 android:layout_marginTop="5dp"
-                android:background="#A0A0A0"/>
+                android:background="@color/lightGray"/>
 
             <TextView
                 android:id="@+id/textViewDescription"
@@ -57,6 +57,41 @@
 
         </LinearLayout>
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:weightSum="100"
+            android:layout_marginTop="10dp"
+            android:padding="10dp"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/buttonView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="50"
+                android:background="@color/colorAccent"
+                android:textColor="@color/white"
+                android:shadowRadius="10"
+                android:inputType="textCapWords"
+                android:textStyle="bold"
+                android:layout_marginRight="10dp"
+                android:text="View"/>
+
+            <Button
+                android:text="Delete"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="50"
+                android:background="@color/red"
+                android:textStyle="bold"
+                android:shadowRadius="10"
+                android:inputType="textCapWords"
+                android:id="@+id/buttonDelete"
+                android:layout_marginLeft="10dp"
+                android:textColor="@color/white"/>
+
+        </LinearLayout>
 
     </LinearLayout>
 

@@ -17,7 +17,7 @@ public class App extends Application {
         super.onCreate();
 
         DaoMaster.DevOpenHelper helper = new DaoMaster.DevOpenHelper(this, ENCRYPTED ? "recipe_app_encrypted" : "recipe_app");
-        Database db = ENCRYPTED ? helper.getEncryptedWritableDb("wingan1234") : helper.getWritableDb();
+        Database db = ENCRYPTED ? helper.getEncryptedWritableDb("recipeapp1234") : helper.getWritableDb();
         daoSession = new DaoMaster(db).newSession();
     }
 
