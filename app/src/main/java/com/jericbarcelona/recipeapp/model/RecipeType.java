@@ -17,17 +17,19 @@ public class RecipeType {
     private String uuid;
 
     private String type;
+    private String imageLocation;
 
     private Date createdAt;
     private Date updatedAt;
     private Date deletedAt;
 
-    @Generated(hash = 2144159139)
-    public RecipeType(Long id, @NotNull String uuid, String type, Date createdAt,
-            Date updatedAt, Date deletedAt) {
+    @Generated(hash = 716761568)
+    public RecipeType(Long id, @NotNull String uuid, String type,
+            String imageLocation, Date createdAt, Date updatedAt, Date deletedAt) {
         this.id = id;
         this.uuid = uuid;
         this.type = type;
+        this.imageLocation = imageLocation;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
         this.deletedAt = deletedAt;
@@ -70,6 +72,12 @@ public class RecipeType {
     }
     public void setDeletedAt(Date deletedAt) {
         this.deletedAt = deletedAt;
+    }
+    public String getImageLocation() {
+        return this.imageLocation;
+    }
+    public void setImageLocation(String imageLocation) {
+        this.imageLocation = imageLocation;
     }
 
 
