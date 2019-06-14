@@ -197,6 +197,8 @@ public class RecipeDetailsActivity extends AppCompatActivity {
                         recipeImageDialog.setContentView(R.layout.image_cropper);
                         recipeImageDialog.setTitle("Capture Recipe Image");
                         recipeImageDialog.setCancelable(true);
+                        Window window = dialogBuilder.getWindow();
+                        window.setLayout(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);
                         recipeImageDialog.show();
                         recipeImageDialog.getWindow().setTitleColor(getResources().getColor(R.color.colorAccent));
 

@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#E0E0E0"
+    android:background="@color/white"
     android:orientation="vertical"
     android:weightSum="100">
 
@@ -40,6 +40,7 @@
                 android:id="@+id/textViewDescription"
                 android:layout_width="match_parent"
                 android:layout_marginTop="5dp"
+                android:textColor="@color/textColor"
                 android:textSize="15sp"
                 android:layout_height="wrap_content" />
 
@@ -48,14 +49,16 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:textStyle="bold"
-                android:textSize="18sp"
-                android:gravity="center"
+                android:textSize="16sp"
+                android:textColor="@color/textColor"
+                android:gravity="left"
                 android:text="Ingredients:"/>
 
             <LinearLayout
                 android:id="@+id/linearLayoutIngredients"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
                 android:orientation="vertical">
 
             </LinearLayout>
@@ -64,15 +67,17 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                android:textSize="18sp"
+                android:textSize="16sp"
                 android:textStyle="bold"
-                android:gravity="center"
+                android:gravity="left"
+                android:textColor="@color/textColor"
                 android:text="Steps:"/>
 
             <LinearLayout
                 android:id="@+id/linearLayoutSteps"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
                 android:orientation="vertical">
 
             </LinearLayout>

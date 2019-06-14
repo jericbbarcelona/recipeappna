@@ -6,6 +6,7 @@ import android.graphics.BitmapFactory;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -71,6 +72,7 @@ public class MainActivity extends AppCompatActivity {
 
             ImageButton imageViewTypeImage = linearLayoutItem.findViewById(R.id.imageViewTypeImage);
             TextView textViewTypeName = linearLayoutItem.findViewById(R.id.textViewTypeName);
+            Button buttonView = linearLayoutItem.findViewById(R.id.buttonView);
 
             textViewTypeName.setText(recipeTypeItem.getType());
 
@@ -91,7 +93,7 @@ public class MainActivity extends AppCompatActivity {
 //                Util.imageLoader.displayImage(imageUri, imageViewTypeImage);
 //            }
 
-            imageViewTypeImage.setOnClickListener(new View.OnClickListener() {
+            buttonView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     Intent intent = new Intent(MainActivity.this, RecipeDetailsActivity.class);

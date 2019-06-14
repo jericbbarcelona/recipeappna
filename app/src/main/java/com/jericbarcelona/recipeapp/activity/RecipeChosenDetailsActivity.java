@@ -275,7 +275,7 @@ public class RecipeChosenDetailsActivity extends AppCompatActivity {
             LinearLayout linearLayoutItem = (LinearLayout) getLayoutInflater().inflate(R.layout.instruction_item, null);
             TextView textView = linearLayoutItem.findViewById(R.id.textViewValue);
 
-            textView.setText(item.getNumber() + ". " + item.getValue());
+            textView.setText("* " + item.getValue());
 
             linearLayout.addView(linearLayoutItem);
         }
