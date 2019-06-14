@@ -9,6 +9,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
+import android.os.PersistableBundle;
 import android.provider.MediaStore;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
@@ -23,16 +24,18 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.jericbarcelona.recipeapp.AppConstants;
 import com.jericbarcelona.recipeapp.MainActivity;
 import com.jericbarcelona.recipeapp.R;
 import com.jericbarcelona.recipeapp.model.DaoSession;
 import com.jericbarcelona.recipeapp.model.RecipeDetails;
+import com.jericbarcelona.recipeapp.model.RecipeDetailsDao;
 import com.jericbarcelona.recipeapp.model.RecipeIngredients;
-import com.jericbarcelona.recipeapp.model.RecipeIngredientsDao;
 import com.jericbarcelona.recipeapp.model.RecipeSteps;
 import com.jericbarcelona.recipeapp.util.Util;
 import com.theartofdev.edmodo.cropper.CropImageView;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -60,6 +63,11 @@ public class RecipeDetailsActivity extends AppCompatActivity {
     }
 
     @Override
+    public void onSaveInstanceState(Bundle outState, PersistableBundle outPersistentState) {
+        super.onSaveInstanceState(outState, outPersistentState);
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recipe_details);
@@ -68,13 +76,13 @@ public class RecipeDetailsActivity extends AppCompatActivity {
         initializeView();
 
         Bundle extras = getIntent().getExtras();
-        typeUuid = extras.getString("type_uuid");
-        recipeType = extras.getString("recipe_type");
+        typeUuid = extras.getString(AppConstants.BUNDLE_TYPE_UUID);
+        recipeType = extras.getString(AppConstants.BUNDLE_RECIPE_TYPE);
 
         getSupportActionBar().setTitle(recipeType + " Recipes");
 
         final DaoSession daoSession = Util.getDaoSession(this);
-        final List<RecipeDetails> recipeDetailsList = daoSession.getRecipeDetailsDao().queryBuilder().list(); //daoSession.getRecipeDetailsDao().queryBuilder().where(RecipeDetailsDao.Properties.TypeUuid.eq(typeUuid)).list();
+        final List<RecipeDetails> recipeDetailsList = daoSession.getRecipeDetailsDao().queryBuilder().where(RecipeDetailsDao.Properties.TypeUuid.eq(typeUuid)).list();
         if (!recipeDetailsList.isEmpty()) {
             initRecipeDetailsByType(linearLayoutRecipeDetails, recipeDetailsList);
         } else {
@@ -95,21 +103,19 @@ public class RecipeDetailsActivity extends AppCompatActivity {
                 final List<String> ingredientStrList = new ArrayList<>();
                 final List<String> stepStrList = new ArrayList<>();
 
-                FloatingActionButton floatingActionButtonAddRecipe = dialogBuilder.findViewById(R.id.floatingButtonAddRecipeDetails);
-
                 final ImageView imageViewRecipe = dialogBuilder.findViewById(R.id.imageViewRecipe);
                 final EditText editTextAddIngredients = dialogBuilder.findViewById(R.id.editTextAddIngredients);
                 final EditText editTextAddStep = dialogBuilder.findViewById(R.id.editTextAddStep);
                 final LinearLayout linearLayoutIngredients = dialogBuilder.findViewById(R.id.linearLayoutIngredients);
                 final LinearLayout linearLayoutSteps = dialogBuilder.findViewById(R.id.linearLayoutSteps);
-
-                ImageView imageViewClose = dialogBuilder.findViewById(R.id.imageButtonClose);
-
                 final EditText editTextRecipeName = dialogBuilder.findViewById(R.id.editTextRecipeName);
                 final EditText editTextDescription = dialogBuilder.findViewById(R.id.editTextDescription);
 
+                FloatingActionButton floatingActionButtonAddRecipe = dialogBuilder.findViewById(R.id.floatingButtonAddRecipeDetails);
                 Button buttonAddIngredients = dialogBuilder.findViewById(R.id.buttonAddIngredients);
                 Button buttonAddStep = dialogBuilder.findViewById(R.id.buttonAddStep);
+
+                ImageView imageViewClose = dialogBuilder.findViewById(R.id.imageButtonClose);
 
                 floatingActionButtonAddRecipe.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -151,6 +157,8 @@ public class RecipeDetailsActivity extends AppCompatActivity {
 
                             Toast.makeText(RecipeDetailsActivity.this, "New recipe successfully added!", Toast.LENGTH_LONG).show();
 
+                            dialogBuilder.dismiss();
+
                             final List<RecipeDetails> recipeDetailsList = daoSession.getRecipeDetailsDao().queryBuilder().list(); //daoSession.getRecipeDetailsDao().queryBuilder().where(RecipeDetailsDao.Properties.TypeUuid.eq(typeUuid)).list();
                             if (!recipeDetailsList.isEmpty()) {
                                 initRecipeDetailsByType(linearLayoutRecipeDetails, recipeDetailsList);
@@ -165,9 +173,15 @@ public class RecipeDetailsActivity extends AppCompatActivity {
                     @Override
                     public void onClick(View view) {
                         String step = editTextAddStep.getText().toString();
-                        stepStrList.add(step);
+                        if(!step.equals("")) {
+                            stepStrList.add(step);
 
-                        initAddStep(linearLayoutSteps, stepStrList);
+                            initAddStep(linearLayoutSteps, stepStrList);
+
+                            editTextAddStep.setText("");
+                        } else {
+                            Toast.makeText(RecipeDetailsActivity.this, "Please fill out the step field.", Toast.LENGTH_LONG).show();
+                        }
                     }
                 });
 
@@ -175,9 +189,16 @@ public class RecipeDetailsActivity extends AppCompatActivity {
                     @Override
                     public void onClick(View view) {
                         String ingredient = editTextAddIngredients.getText().toString();
-                        ingredientStrList.add(ingredient);
 
-                        initAddIngredients(linearLayoutIngredients, ingredientStrList);
+                        if(!ingredient.equals("")) {
+                            ingredientStrList.add(ingredient);
+
+                            initAddIngredients(linearLayoutIngredients, ingredientStrList);
+
+                            editTextAddIngredients.setText("");
+                        } else {
+                            Toast.makeText(RecipeDetailsActivity.this, "Please fill out the ingredient field.", Toast.LENGTH_LONG).show();
+                        }
                     }
                 });
 
@@ -274,7 +295,7 @@ public class RecipeDetailsActivity extends AppCompatActivity {
             LinearLayout linearLayoutItem = (LinearLayout) getLayoutInflater().inflate(R.layout.instruction_item, null);
             TextView textView = linearLayoutItem.findViewById(R.id.textViewValue);
 
-            textView.setText(counter + ". " + item);
+            textView.setText("* " + item);
 
             counter++;
 
@@ -311,18 +332,25 @@ public class RecipeDetailsActivity extends AppCompatActivity {
             textViewTypeName.setText(recipeDetailsItem.getName() == null ? "" : recipeDetailsItem.getName());
             textViewDescription.setText(recipeDetailsItem.getDescription() == null ? "" : recipeDetailsItem.getDescription());
 
-            Bitmap placeholder = BitmapFactory.decodeResource(getResources(), R.drawable.beef);
-            imageViewTypeImage.setImageBitmap(placeholder);
+            File recipeTypeImageFile = new File(AppConstants.EXTERNAL_STORAGE, recipeDetailsItem.getImageLocation());
+            if (recipeTypeImageFile.exists()) {
+                String imageUri = "file://" + recipeTypeImageFile.getAbsolutePath();
+                Util.imageLoader.displayImage(imageUri, imageViewTypeImage);
+            } else {
+                Bitmap placeholder = BitmapFactory.decodeResource(getResources(), R.drawable.recipe_logo_sample);
+                imageViewTypeImage.setImageBitmap(placeholder);
+            }
+
 
             buttonView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     Intent intent = new Intent(RecipeDetailsActivity.this, RecipeChosenDetailsActivity.class);
                     Bundle routeInfoBundle = new Bundle();
-                    routeInfoBundle.putString("details_uuid", recipeDetailsItem.getUuid());
-                    routeInfoBundle.putString("details_name", recipeDetailsItem.getName());
-                    routeInfoBundle.putString("type_uuid", typeUuid);
-                    routeInfoBundle.putString("recipe_type", recipeType);
+                    routeInfoBundle.putString(AppConstants.BUNDLE_DETAILS_UUID, recipeDetailsItem.getUuid());
+                    routeInfoBundle.putString(AppConstants.BUNDLE_DETAILS_NAME, recipeDetailsItem.getName());
+                    routeInfoBundle.putString(AppConstants.BUNDLE_TYPE_UUID, typeUuid);
+                    routeInfoBundle.putString(AppConstants.BUNDLE_RECIPE_TYPE, recipeType);
                     intent.putExtras(routeInfoBundle);
                     startActivity(intent);
                 }
@@ -350,12 +378,6 @@ public class RecipeDetailsActivity extends AppCompatActivity {
                     alertDialog.show();
                 }
             });
-
-//            File recipeTypeImageFile = new File(AppConstants.EXTERNAL_STORAGE, recipeDetailsItem.getImageLocation());
-//            if (recipeTypeImageFile.exists()) {
-//                String imageUri = "file://" + recipeTypeImageFile.getAbsolutePath();
-//                Util.imageLoader.displayImage(imageUri, imageViewTypeImage);
-//            }
 
             linearLayout.addView(linearLayoutItem);
         }

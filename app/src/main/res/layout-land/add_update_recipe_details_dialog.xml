@@ -2,21 +2,25 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="vertical">
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical"
+    android:weightSum="100">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_weight="45"
         android:background="@color/colorPrimary"
         android:orientation="horizontal"
+        android:padding="10dp"
         android:paddingLeft="10dp"
         android:paddingRight="10dp"
         android:weightSum="100">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_weight="50"
             android:gravity="center|left">
 
@@ -49,105 +53,55 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent"
+        android:layout_weight="15">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:orientation="vertical"
+            android:orientation="horizontal"
+            android:layout_marginTop="50dp"
             android:padding="10dp"
             android:weightSum="100">
 
-            <ImageView
-                android:id="@+id/imageViewRecipe"
-                android:layout_width="20mm"
-                android:layout_height="20mm"
-                android:layout_gravity="center"
-
-                android:src="@drawable/defaultrecipe" />
-
-            <android.support.design.widget.TextInputLayout
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:visibility="gone">
+                android:layout_weight="70"
+                android:padding="20dp"
+                android:orientation="vertical">
 
-                <EditText
-                    android:id="@+id/editTextRecipeType"
-                    android:layout_width="match_parent"
-                    android:layout_height="50dp"
-                    android:background="@drawable/shape_sharp_corners_lightgray"
-                    android:hint="Recipe Type"
-                    android:inputType="textCapWords"
-                    android:padding="5dp"
-                    android:paddingTop="10dp"
-                    android:textColorHint="#E0E0E0"
-                    android:textSize="15sp"
-                    android:translationY="5dp" />
+                <ImageView
+                    android:id="@+id/imageViewRecipe"
+                    android:layout_width="200dp"
+                    android:layout_height="200dp"
+                    android:layout_gravity="center"
+                    android:src="@drawable/defaultrecipe" />
 
-            </android.support.design.widget.TextInputLayout>
-
-            <android.support.design.widget.TextInputLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp">
-
-                <EditText
-                    android:id="@+id/editTextRecipeName"
-                    android:layout_width="match_parent"
-                    android:layout_height="50dp"
-                    android:background="@drawable/shape_sharp_corners_lightgray"
-                    android:hint="Recipe Name"
-                    android:inputType="textCapWords"
-                    android:padding="5dp"
-                    android:paddingTop="10dp"
-                    android:textColorHint="#E0E0E0"
-                    android:textSize="15sp"
-                    android:translationY="5dp" />
-
-            </android.support.design.widget.TextInputLayout>
-
-            <android.support.design.widget.TextInputLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp">
-
-                <EditText
-                    android:id="@+id/editTextDescription"
-                    android:layout_width="match_parent"
-                    android:layout_height="50dp"
-                    android:background="@drawable/shape_sharp_corners_lightgray"
-                    android:hint="Recipe Description"
-                    android:inputType="textCapWords"
-                    android:padding="5dp"
-                    android:paddingTop="10dp"
-                    android:textColorHint="#E0E0E0"
-                    android:textSize="15sp"
-                    android:translationY="5dp" />
-
-            </android.support.design.widget.TextInputLayout>
+            </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:orientation="horizontal"
-                android:weightSum="100">
+                android:layout_weight="30"
+                android:padding="20dp"
+                android:layout_marginTop="10dp"
+                android:orientation="vertical">
 
                 <android.support.design.widget.TextInputLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginRight="5dp"
-                    android:layout_weight="20">
+                    android:layout_marginTop="10dp">
 
                     <EditText
-                        android:id="@+id/editTextAddIngredients"
+                        android:id="@+id/editTextRecipeName"
                         android:layout_width="match_parent"
                         android:layout_height="50dp"
                         android:background="@drawable/shape_sharp_corners_lightgray"
-                        android:hint="Add Ingredients"
+                        android:hint="Recipe Name"
                         android:inputType="textCapWords"
+                        android:layout_marginBottom="10dp"
                         android:padding="5dp"
                         android:paddingTop="10dp"
                         android:textColorHint="#E0E0E0"
@@ -156,51 +110,19 @@
 
                 </android.support.design.widget.TextInputLayout>
 
-                <Button
-                    android:id="@+id/buttonAddIngredients"
-                    android:layout_width="match_parent"
-                    android:layout_height="50dp"
-                    android:layout_marginLeft="5dp"
-                    android:layout_marginTop="10dp"
-                    android:layout_weight="80"
-                    android:background="@drawable/button_click_view_details"
-                    android:gravity="center"
-                    android:inputType="textCapWords"
-                    android:text="Add"
-                    android:textColor="@color/white"
-                    android:textSize="13sp" />
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/linearLayoutIngredients"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:orientation="vertical">
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:orientation="horizontal"
-                android:weightSum="100">
-
                 <android.support.design.widget.TextInputLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginRight="5dp"
-                    android:layout_weight="20">
+                    android:layout_marginTop="10dp">
 
                     <EditText
-                        android:id="@+id/editTextAddStep"
+                        android:id="@+id/editTextDescription"
                         android:layout_width="match_parent"
                         android:layout_height="50dp"
                         android:background="@drawable/shape_sharp_corners_lightgray"
-                        android:hint="Add Step"
+                        android:hint="Recipe Description"
                         android:inputType="textCapWords"
+                        android:layout_marginBottom="10dp"
                         android:padding="5dp"
                         android:paddingTop="10dp"
                         android:textColorHint="#E0E0E0"
@@ -209,28 +131,115 @@
 
                 </android.support.design.widget.TextInputLayout>
 
-                <Button
-                    android:id="@+id/buttonAddStep"
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="50dp"
-                    android:layout_marginLeft="5dp"
+                    android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
-                    android:layout_weight="80"
-                    android:background="@drawable/button_click_view_details"
-                    android:gravity="center"
-                    android:inputType="textCapWords"
-                    android:text="Add"
-                    android:textColor="@color/white"
-                    android:textSize="13sp" />
+                    android:orientation="horizontal"
+                    android:weightSum="100">
 
-            </LinearLayout>
+                    <android.support.design.widget.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="5dp"
+                        android:layout_weight="20">
 
-            <LinearLayout
-                android:id="@+id/linearLayoutSteps"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:orientation="vertical">
+                        <EditText
+                            android:id="@+id/editTextAddIngredients"
+                            android:layout_width="match_parent"
+                            android:layout_height="50dp"
+                            android:layout_marginBottom="10dp"
+                            android:background="@drawable/shape_sharp_corners_lightgray"
+                            android:hint="Add Ingredients"
+                            android:inputType="textCapWords"
+                            android:padding="5dp"
+                            android:paddingTop="10dp"
+                            android:textColorHint="#E0E0E0"
+                            android:textSize="15sp"
+                            android:translationY="5dp" />
+
+                    </android.support.design.widget.TextInputLayout>
+
+                    <Button
+                        android:id="@+id/buttonAddIngredients"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_weight="80"
+                        android:background="@drawable/button_click_view_details"
+                        android:gravity="center"
+                        android:inputType="textCapWords"
+                        android:text="Add"
+                        android:translationY="5dp"
+                        android:textColor="@color/white"
+                        android:textSize="13sp" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/linearLayoutIngredients"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:orientation="vertical">
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:orientation="horizontal"
+                    android:weightSum="100">
+
+                    <android.support.design.widget.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="5dp"
+                        android:layout_weight="20">
+
+                        <EditText
+                            android:id="@+id/editTextAddStep"
+                            android:layout_width="match_parent"
+                            android:layout_height="50dp"
+                            android:background="@drawable/shape_sharp_corners_lightgray"
+                            android:hint="Add Step"
+                            android:inputType="textCapWords"
+                            android:layout_marginBottom="10dp"
+                            android:padding="5dp"
+                            android:paddingTop="10dp"
+                            android:textColorHint="#E0E0E0"
+                            android:textSize="15sp"
+                            android:translationY="5dp" />
+
+                    </android.support.design.widget.TextInputLayout>
+
+                    <Button
+                        android:id="@+id/buttonAddStep"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_weight="80"
+                        android:background="@drawable/button_click_view_details"
+                        android:gravity="center"
+                        android:inputType="textCapWords"
+                        android:text="Add"
+                        android:translationY="5dp"
+                        android:textColor="@color/white"
+                        android:textSize="13sp" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/linearLayoutSteps"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:orientation="vertical">
+
+                </LinearLayout>
 
             </LinearLayout>
 
@@ -240,8 +249,9 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:layout_gravity="bottom"
+        android:layout_weight="40"
         android:gravity="right"
         android:orientation="horizontal">
 

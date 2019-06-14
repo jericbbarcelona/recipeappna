@@ -7,117 +7,201 @@
       "details": [
         {
           "uuid": "0aeb2278-91d6-4dc0-a17d-6443ed66be9e",
-          "name": "Chicken Kaldereta",
-          "description": "Kaldereta or caldereta is a goat meat stew from the Philippines. Variations of the dish use beef, chicken or pork. Commonly the goat meat is stewed with vegetables and a liver paste. Vegetables may include tomatoes, potatoes, olives, bell peppers and hot peppers; kaldereta sometimes includes tomato sauce.",
-          "country": "Philippines",
-          "image_location": "/recipe_app/types/chicken/kaldereta.jpeg",
+          "name": "Chicken Curry",
+          "description": "Chicken curry is a dish originating from the Indian subcontinent, common delicacy in the cuisine of the Indian subcontinent, cuisine of Southeast Asia, as well as in the cuisine of the Caribbean.",
+          "country": null,
+          "image_location": "/recipe_app/types/chicken/chicken_curry.png",
           "ingredients": [
             {
-              "uuid": "8efefb15-d5ed-478e-b73e-f8d9017e9b62",
-              "value": "2 lbs. Chicken cubed"
+              "uuid": "27e16870-88b5-4f70-9352-5ce460ed868c",
+              "value": "1 pc bay leaf"
             },
             {
-              "uuid": "065a5939-f585-4ddf-8265-71ad77fd5b52",
-              "value": "1 15 oz. can tomato sauce"
+              "uuid": "d4c5f4c5-ed78-4250-b0a1-955d12cd0b5b",
+              "value": "1 pc potato, cubed"
+            },
+            {
+              "uuid": "40f13c37-a7ad-4c0a-a02e-974b9833ead7",
+              "value": "1 pc small green bell pepper, diced"
+            },
+            {
+              "uuid": "6e9b8c83-ee8b-444f-b3d1-ca2a3fe2d806",
+              "value": "1 pc onion, chopped"
+            },
+            {
+              "uuid": "ff02bdcc-1264-4c87-823d-92c0981ffa19",
+              "value": "2 tbsp vegetable oil"
+            },
+            {
+              "uuid": "27b5ceb0-97a1-437b-94c4-ff06fb460e06",
+              "value": "1 pc small red bell pepper, diced"
             }
           ],
           "steps": [
             {
-              "uuid": "346a5336-ab8e-4471-8bb0-7eeb6a8d08da",
+              "uuid": "bd85aa35-21fa-4b6f-a252-97ae3f337fa2",
               "number": 1,
-              "value": "Heat the oil in a cooking pot."
+              "value": "Heat oil, sauté garlic, onions and ginger until limp. Add chicken and cook until it changes color."
             },
             {
-              "uuid": "efe842a7-f56d-4c15-9018-bd0d84c6290b",
+              "uuid": "f6312a12-c47d-4beb-b91b-cb814fabc685",
               "number": 2,
-              "value": "Once the oil is hot, saute the garlic and onion."
+              "value": "Add water and bring to a boil. Season with patis and MAGGI MAGIC SARAP."
             },
             {
-              "uuid": "cc703422-0c81-4321-8f48-213c4a97f30e",
+              "uuid": "5084ec46-11a1-4d7d-9a3f-3a1193d73d90",
               "number": 3,
-              "value": "Add the chicken. Stir and cook for for 5 minutes or until the color turns light to medium brown."
+              "value": "Add the rest of the ingredients and NESTLÉ All Purpose Cream and continue simmering until chicken is completely cooked and sauce thickens, about 20 minutes."
+            },
+            {
+              "uuid": "ba8b5dfd-0454-4df5-b9a5-079db06f572d",
+              "number": 4,
+              "value": "Season to taste."
             }
           ]
         }
       ]
     },
     {
-      "uuid": "8bf75ffb-8264-42e5-a3a0-9b8bd3e4175d",
+      "uuid": "87aa6e7e-364d-4da7-adc2-6409035236c3",
       "name": "Beef",
       "image_location": "/recipe_app/types/beef.jpg",
       "details": [
         {
-          "uuid": "42abadfd-29b8-48ff-a69a-97fc22c8921e",
+          "uuid": "5902e560-1081-482c-ac49-1652b70c05ee",
           "name": "Beef Steak",
           "description": "A beef steak is a flat cut of beef, with parallel faces spaced to a thickness of 0.5–2 in, usually cut perpendicular to the muscle fibers, with a raw mass in common restaurant service ranging from 4–20 oz. Beef steaks are usually grilled, pan fried, or broiled.",
           "country": "Philippines",
-          "image_location": "/recipe_app/types/chicken/kaldereta.jpeg",
+          "image_location": "/recipe_app/types/beef/beef_steak.jpg",
           "ingredients": [
             {
-              "uuid": "8efefb15-d5ed-478e-b73e-f8d9017e9b622",
-              "value": "2 lbs. Chicken cubed"
+              "uuid": "467d5ab7-8245-49a1-a294-73a0a5f4c68b",
+              "value": "1 1/2 lbs beef sirloin thinly sliced"
             },
             {
-              "uuid": "065a5939-f585-4ddf-8265-71ad77fd5b522",
-              "value": "1 15 oz. can tomato sauce"
+              "uuid": "20b6629a-bb7b-4c90-a234-9c69727fba48",
+              "value": "5 tablespoons soy sauce"
+            },
+            {
+              "uuid": "78bf02fe-6496-46a0-b983-44bf6d3b674a",
+              "value": "4 pieces calamansi or 1-piece lemon"
+            },
+            {
+              "uuid": "8cb635fc-b32b-4d16-9270-7a9631ad8638",
+              "value": "1/2 tsp ground black pepper"
+            },
+            {
+              "uuid": "6ba4c5e9-777b-420f-9ea9-20823ba3aef3",
+              "value": "3 cloves garlic minced"
+            },
+            {
+              "uuid": "4a9b9f0c-875e-4ac2-943f-1d7978b602c4",
+              "value": "3 pieces yellow onion sliced into rings"
             }
           ],
           "steps": [
             {
-              "uuid": "346a5336-ab8e-4471-8bb0-7eeb6a8d08da2",
+              "uuid": "ad082026-ae33-4d70-a64c-4a942695f0df",
               "number": 1,
-              "value": "Heat the oil in a cooking pot."
+              "value": "Marinate beef in soy sauce, lemon (or calamansi), and ground black pepper for at least 1 hour. Note: marinate overnight for best result"
             },
             {
-              "uuid": "efe842a7-f56d-4c15-9018-bd0d84c6290b2",
+              "uuid": "79291960-d37c-4c97-9256-9cfa415d1574",
               "number": 2,
-              "value": "Once the oil is hot, saute the garlic and onion."
+              "value": "Heat the cooking oil in a pan then pan-fry half of the onions until the texture becomes soft. Set aside"
             },
             {
-              "uuid": "cc703422-0c81-4321-8f48-213c4a97f30e2",
+              "uuid": "76918724-3886-48dc-b84b-359a5b45212b",
               "number": 3,
-              "value": "Add the chicken. Stir and cook for for 5 minutes or until the color turns light to medium brown."
+              "value": "Drain the marinade from the beef. Set it aside. Pan-fry the beef on the same pan where the onions were fried for 1 minute per side. Remove from the pan. Set aside"
+            },
+            {
+              "uuid": "5de6950e-8e52-48b2-96c0-e67547676bd6",
+              "number": 4,
+              "value": "Add more oil if needed. Saute garlic and remaining raw onions until onion softens."
+            },
+            {
+              "uuid": "b3e6cf03-4027-46d5-878b-eadad00a3354",
+              "number": 5,
+              "value": "Pour the remaining marinade and water. Bring to a boil."
+            },
+            {
+              "uuid": "804bdf1f-f2eb-4b02-b691-b57133d40f5b",
+              "number": 6,
+              "value": "Add beef. Cover the pan and simmer until meat is tender. Note: Add water as needed."
+            },
+            {
+              "uuid": "6130618e-9ef7-4f06-90b8-8395dc69960b",
+              "number": 7,
+              "value": "Season with ground black pepper and salt as needed. Top with pan-fried onions."
+            },
+            {
+              "uuid": "30da33ae-2606-4c45-9646-ba1111ce55f5",
+              "number": 8,
+              "value": "Transfer to a serving plate. Serve hot. Share and Enjoy!"
             }
           ]
         }
       ]
     },
     {
-      "uuid": "29adef48-cfac-4723-a7b0-e2c4d33f2be1",
+      "uuid": "8d941349-ad83-4cde-b8ae-e6dfb29b3d55",
       "name": "Fish",
-      "image_location": "/recipe_app/types/fish.jpg",
+      "image_location": "/recipe_app/types/fish_fillet.jpg",
       "details": [
         {
-          "uuid": "42abadfd-29b8-48ff-a69a-97fc22c8921e",
+          "uuid": "cae9e1e7-8b09-46c1-a257-e504d0bdab25",
           "name": "Fish Fillet",
           "description": "A fish fillet, from the French word filet meaning a thread or strip, is the flesh of a fish which has been cut or sliced away from the bone by cutting lengthwise along one side of the fish parallel to the backbone. In preparation for filleting, any scales on the fish should be removed.",
-          "country": "Philippines",
-          "image_location": "/recipe_app/types/chicken/kaldereta.jpeg",
+          "country": null,
+          "image_location": "/recipe_app/types/fish/fish_fillet.jpg",
           "ingredients": [
             {
-              "uuid": "8efefb15-d5ed-478e-b73e-f8d90217e9b622",
-              "value": "2 lbs. Chicken cubed"
+              "uuid": "db46c187-38c5-49c3-857a-11237855a918",
+              "value": "1 pound fish fillets (such as haddock, tilapia, cod, etc.)"
             },
             {
-              "uuid": "065a5939-f585-4ddf-8265-721ad77fd5b522",
-              "value": "1 15 oz. can tomato sauce"
+              "uuid": "7e7fcf30-f08f-4716-af36-d57bf12c2169",
+              "value": "Oil for deep frying"
+            },
+            {
+              "uuid": "53bf6932-b727-4aa6-bb87-03ea46aaaee5",
+              "value": "Dash salt (or to taste)"
+            },
+            {
+              "uuid": "64b5ca51-0199-4d8f-a561-a8169e6d4eaf",
+              "value": "Dash pepper (or to taste)"
+            },
+            {
+              "uuid": "d2b0c286-a5f5-4582-a929-d1a5535c4aee",
+              "value": "1/4 teaspoon paprika"
             }
           ],
           "steps": [
             {
-              "uuid": "346a5336-ab8e-4471-8bb0-27eeb6a8d08da2",
+              "uuid": "f6649450-3d59-4c57-a5e6-426d6616c3de",
               "number": 1,
-              "value": "Heat the oil in a cooking pot."
+              "value": "Gather the ingredients."
             },
             {
-              "uuid": "efe842a7-f56d-4c15-90218-bd0d84c6290b2",
+              "uuid": "a0c1cd35-63f3-4581-9b52-585f1c942695",
               "number": 2,
-              "value": "Once the oil is hot, saute the garlic and onion."
+              "value": "Pour 1 inch of oil in skillet; heat to 375 F."
             },
             {
-              "uuid": "cc703422-0c81-4321-28f48-213c4a97f30e2",
+              "uuid": "f7d67eb0-944b-46c1-965c-9ff369b6697e",
               "number": 3,
-              "value": "Add the chicken. Stir and cook for for 5 minutes or until the color turns light to medium brown."
+              "value": "Combine flour, salt, pepper, and paprika, and mix together."
+            },
+            {
+              "uuid": "bca40055-8021-43b4-b614-55e533115990",
+              "number": 4,
+              "value": "Dip fish fillets into flour mixture."
+            },
+            {
+              "uuid": "51ed70d4-b965-469e-b4f7-6a248be99220",
+              "number": 5,
+              "value": "Working in batches, fry fish for about 5 minutes on each side; remove to a platter."
             }
           ]
         }

@@ -89,7 +89,7 @@
                     android:inputType="textCapWords"
                     android:shadowRadius="10"
                     android:background="@drawable/button_click_view_details"
-                    android:text="View"
+                    android:text="View Details"
                     android:textColor="@color/white"
                     android:textStyle="bold" />
 

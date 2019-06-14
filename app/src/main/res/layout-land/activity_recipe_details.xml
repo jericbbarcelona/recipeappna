@@ -10,8 +10,8 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="20">
+        android:layout_height="match_parent"
+        android:layout_weight="23">
 
         <LinearLayout
             android:id="@+id/linearLayoutRecipeDetails"
@@ -30,7 +30,7 @@
         android:layout_height="match_parent"
         android:layout_gravity="bottom"
         android:layout_marginTop="5dp"
-        android:layout_weight="80"
+        android:layout_weight="77"
         android:gravity="right"
         android:orientation="horizontal">
 

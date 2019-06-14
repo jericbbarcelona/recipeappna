@@ -6,11 +6,13 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
+import android.content.res.AssetManager;
 import android.net.Uri;
 import android.os.Parcelable;
 import android.provider.MediaStore;
 
 import com.jericbarcelona.recipeapp.App;
+import com.jericbarcelona.recipeapp.AppConstants;
 import com.jericbarcelona.recipeapp.helper.SharedPreferenceHelper;
 import com.jericbarcelona.recipeapp.model.DaoSession;
 import com.jericbarcelona.recipeapp.model.RecipeDetails;
@@ -28,8 +30,10 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.OutputStream;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.Date;
@@ -90,13 +94,6 @@ public class Util {
                     recipeType.setUpdatedAt(new Date());
 
                     daoSession.getRecipeTypeDao().insert(recipeType);
-                } else {
-                    RecipeType recipeType = recipeTypes.get(0);
-                    recipeType.setType(recipeTypeName);
-                    recipeType.setImageLocation(recipeTypeImageLocation);
-                    recipeType.setUpdatedAt(new Date());
-
-//                    daoSession.getRecipeTypeDao().update(recipeType);
                 }
 
                 JSONArray jsonArrayRecipeDetails = jsonRecipeTypeItem.getJSONArray("details");
@@ -123,18 +120,6 @@ public class Util {
                         recipeDetailsItem.setUpdatedAt(new Date());
 
                         daoSession.getRecipeDetailsDao().insert(recipeDetailsItem);
-                    } else {
-                        RecipeDetails recipeDetailsItem = recipeDetails.get(0);
-
-                        recipeDetailsItem.setName(recipeDetailsName);
-                        recipeDetailsItem.setTypeUuid(recipeTypeUuid);
-                        recipeDetailsItem.setCountry(recipeDetailsCountry);
-                        recipeDetailsItem.setImageLocation(recipeDetailsImageLocation);
-                        recipeDetailsItem.setDescription(recipeDetailsDescription);
-
-                        recipeDetailsItem.setUpdatedAt(new Date());
-
-//                        daoSession.getRecipeDetailsDao().update(recipeDetailsItem);
                     }
 
                     JSONArray jsonArrayIngredients = jsonObjectRecipeDetailsItem.getJSONArray("ingredients");
@@ -155,14 +140,6 @@ public class Util {
                             recipeIngredientsItem.setUpdatedAt(new Date());
 
                             daoSession.getRecipeIngredientsDao().insert(recipeIngredientsItem);
-                        } else {
-                            RecipeIngredients recipeIngredientsItem = recipeIngredients.get(0);
-                            recipeIngredientsItem.setValue(ingredientsValue);
-                            recipeIngredientsItem.setDetailsUuid(recipeDetailsUuid);
-
-                            recipeIngredientsItem.setUpdatedAt(new Date());
-
-//                            daoSession.getRecipeIngredientsDao().update(recipeIngredientsItem);
                         }
                     }
 
@@ -186,20 +163,12 @@ public class Util {
                             recipeStepsItem.setUpdatedAt(new Date());
 
                             daoSession.getRecipeStepsDao().insert(recipeStepsItem);
-                        } else {
-                            RecipeSteps recipeStepsItem = recipeSteps.get(0);
-
-                            recipeStepsItem.setValue(stepsValue);
-                            recipeStepsItem.setNumber(stepsNumber);
-                            recipeStepsItem.setDetailsUuid(recipeDetailsUuid);
-
-                            recipeStepsItem.setUpdatedAt(new Date());
-
-//                            daoSession.getRecipeStepsDao().update(recipeStepsItem);
                         }
                     }
                 }
             }
+
+            Util.sp.setSharedPref(AppConstants.SP_RECIPE_DATA_LOADED, "IS_LOADED");
         } catch (JSONException e) {
             e.printStackTrace();
         } catch (UnsupportedEncodingException e) {
@@ -254,5 +223,81 @@ public class Util {
             outputFileUri = Uri.fromFile(new File(getImage.getPath(), "pickImageResult.jpeg"));
         }
         return outputFileUri;
+    }
+
+    public static void copyAssets(Context context) {
+
+        AssetManager assetManager = context.getAssets();
+        String[] files = null;
+        try {
+            files = assetManager.list("");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        if (files != null) {
+            for (String filename : files) {
+                InputStream in = null;
+                OutputStream out = null;
+                try {
+                    in = assetManager.open(filename);
+                    File storage = new File(AppConstants.EXTERNAL_STORAGE + AppConstants.RECIPE_TYPES_STORAGE);
+                    if (!storage.exists()) {
+                        storage.mkdirs();
+                    }
+                    File chickenStorage = new File(AppConstants.EXTERNAL_STORAGE + AppConstants.CHICKEN_RECIPE_STORAGE);
+                    File beefStorage = new File(AppConstants.EXTERNAL_STORAGE + AppConstants.BEEF_RECIPE_STORAGE);
+                    File fishStorage = new File(AppConstants.EXTERNAL_STORAGE + AppConstants.FISH_RECIPE_STORAGE);
+
+                    if(!chickenStorage.exists()) {
+                        chickenStorage.mkdirs();
+                    }
+                    if(!beefStorage.exists()) {
+                        beefStorage.mkdirs();
+                    }
+                    if(!fishStorage.exists()) {
+                        fishStorage.mkdirs();
+                    }
+
+                    if(filename.equals("chicken_curry.png")) {
+                        File outFile = new File(AppConstants.EXTERNAL_STORAGE + AppConstants.CHICKEN_RECIPE_STORAGE, filename);
+                        out = new FileOutputStream(outFile);
+                        copyFile(in, out);
+                    } else if(filename.equals("beef_steak.jpg")) {
+                        File outFile = new File(AppConstants.EXTERNAL_STORAGE + AppConstants.BEEF_RECIPE_STORAGE, filename);
+                        out = new FileOutputStream(outFile);
+                        copyFile(in, out);
+                    } else if(filename.equals("fish_fillet.jpg")) {
+                        File outFile = new File(AppConstants.EXTERNAL_STORAGE + AppConstants.FISH_RECIPE_STORAGE, filename);
+                        out = new FileOutputStream(outFile);
+                        copyFile(in, out);
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                } finally {
+                    if (in != null) {
+                        try {
+                            in.close();
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    }
+                    if (out != null) {
+                        try {
+                            out.close();
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    private static void copyFile(InputStream in, OutputStream out) throws Exception {
+        byte[] buffer = new byte[1024];
+        int read;
+        while ((read = in.read(buffer)) != -1) {
+            out.write(buffer, 0, read);
+        }
     }
 }
