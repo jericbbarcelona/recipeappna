@@ -1,0 +1,1 @@
+All the assets(images, icons, libraries) that I used is for sample app/demo purposes only.
