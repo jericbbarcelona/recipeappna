@@ -18,11 +18,11 @@
             android:id="@+id/imageViewTypeImage"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:scaleType="centerInside"
+            android:scaleType="fitCenter"
             android:adjustViewBounds="true"
             android:layout_marginTop="@null"
             android:layout_weight="30"
-            android:background="@null"
+            android:background="@color/colorAccent"
             android:layout_gravity="center" />
 
         <LinearLayout

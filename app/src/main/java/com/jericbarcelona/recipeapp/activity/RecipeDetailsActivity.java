@@ -14,6 +14,7 @@ import android.provider.MediaStore;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
@@ -36,6 +37,7 @@ import com.jericbarcelona.recipeapp.util.Util;
 import com.theartofdev.edmodo.cropper.CropImageView;
 
 import java.io.File;
+import java.io.FileOutputStream;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -129,7 +131,57 @@ public class RecipeDetailsActivity extends AppCompatActivity {
                             recipeDetails.setTypeUuid(typeUuid);
                             recipeDetails.setName(recipeName);
                             recipeDetails.setDescription(recipeDescription);
-                            daoSession.getRecipeDetailsDao().insert(recipeDetails);
+
+                            if (cropped != null) {
+                                imageViewRecipe.setImageBitmap(cropped);
+                                try {
+                                    String fileName = recipeName + ".jpg";
+                                    File photoDir = null;
+                                    File file = null;
+
+                                    switch (recipeType) {
+                                        case "Fish": {
+                                            photoDir = new File(AppConstants.EXTERNAL_STORAGE + AppConstants.FISH_RECIPE_STORAGE);
+                                            file = new File(AppConstants.EXTERNAL_STORAGE + AppConstants.FISH_RECIPE_STORAGE, fileName);
+                                            recipeDetails.setImageLocation(AppConstants.FISH_RECIPE_STORAGE + fileName);
+                                            break;
+                                        }
+
+                                        case "Beef": {
+                                            photoDir = new File(AppConstants.EXTERNAL_STORAGE + AppConstants.BEEF_RECIPE_STORAGE);
+                                            file = new File(AppConstants.EXTERNAL_STORAGE + AppConstants.BEEF_RECIPE_STORAGE, fileName);
+                                            recipeDetails.setImageLocation(AppConstants.BEEF_RECIPE_STORAGE + fileName);
+                                            break;
+                                        }
+
+                                        case "Chicken": {
+                                            photoDir = new File(AppConstants.EXTERNAL_STORAGE + AppConstants.CHICKEN_RECIPE_STORAGE);
+                                            file = new File(AppConstants.EXTERNAL_STORAGE + AppConstants.CHICKEN_RECIPE_STORAGE, fileName);
+                                            recipeDetails.setImageLocation(AppConstants.CHICKEN_RECIPE_STORAGE + fileName);
+                                            break;
+                                        }
+
+                                        default:
+                                            break;
+                                    }
+
+                                    if (!photoDir.exists()) {
+                                        photoDir.mkdirs();
+                                    }
+
+                                    FileOutputStream out = new FileOutputStream(file);
+                                    cropped.compress(Bitmap.CompressFormat.JPEG, 20, out);
+                                    out.flush();
+                                    out.close();
+
+                                    daoSession.getRecipeDetailsDao().insert(recipeDetails);
+
+                                } catch (SecurityException se) {
+                                    Log.e("Create Folder", se.toString());
+                                } catch (Exception e) {
+                                    e.printStackTrace();
+                                }
+                            }
 
                             for(String item : ingredientStrList) {
                                 RecipeIngredients recipeIngredients = new RecipeIngredients();
@@ -159,7 +211,7 @@ public class RecipeDetailsActivity extends AppCompatActivity {
 
                             dialogBuilder.dismiss();
 
-                            final List<RecipeDetails> recipeDetailsList = daoSession.getRecipeDetailsDao().queryBuilder().list(); //daoSession.getRecipeDetailsDao().queryBuilder().where(RecipeDetailsDao.Properties.TypeUuid.eq(typeUuid)).list();
+                            final List<RecipeDetails> recipeDetailsList = daoSession.getRecipeDetailsDao().queryBuilder().where(RecipeDetailsDao.Properties.TypeUuid.eq(typeUuid)).list();
                             if (!recipeDetailsList.isEmpty()) {
                                 initRecipeDetailsByType(linearLayoutRecipeDetails, recipeDetailsList);
                             }
@@ -230,33 +282,9 @@ public class RecipeDetailsActivity extends AppCompatActivity {
                             @Override
                             public void onClick(View view) {
                                 cropped = imageViewRecipeCrop.getCroppedImage(500, 500);
+
                                 if (cropped != null) {
                                     imageViewRecipe.setImageBitmap(cropped);
-                                    /*try {
-                                        File photoDir = new File(AppConstants.PROFILE_PICTURE_EXTERNAL_STORAGE);
-                                        if (!photoDir.exists()) {
-                                            photoDir.mkdirs();
-                                        }
-                                    } catch (SecurityException se) {
-                                        Log.e("Create Folder", se.toString());
-                                    }
-                                    String fileName = customerId + ".jpg";
-                                    File file = new File(AppConstants.PROFILE_PICTURE_EXTERNAL_STORAGE, fileName);
-                                    try {
-                                        FileOutputStream out = new FileOutputStream(file);
-                                        cropped.compress(Bitmap.CompressFormat.JPEG, 20, out);
-                                        out.flush();
-                                        out.close();
-
-                                        List<WACustomer> waCustomerList = daoSession.getWACustomerDao().queryBuilder().where(WACustomerDao.Properties.CustomerId.eq(customerId)).list();
-                                        if (!waCustomerList.isEmpty()) {
-                                            WACustomer waCustomer = waCustomerList.get(0);
-                                            waCustomer.setProfilePicPath(file.getName());
-                                            daoSession.getWACustomerDao().update(waCustomer);
-                                        }
-                                    } catch (Exception e) {
-                                        e.printStackTrace();
-                                    }*/
                                     recipeImageDialog.cancel();
                                 }
                             }
@@ -289,15 +317,11 @@ public class RecipeDetailsActivity extends AppCompatActivity {
     private void initAddStep(LinearLayout linearLayout, List<String> stepStrList) {
         linearLayout.removeAllViews();
 
-        int counter = 1;
-
         for(String item : stepStrList) {
             LinearLayout linearLayoutItem = (LinearLayout) getLayoutInflater().inflate(R.layout.instruction_item, null);
             TextView textView = linearLayoutItem.findViewById(R.id.textViewValue);
 
             textView.setText("* " + item);
-
-            counter++;
 
             linearLayout.addView(linearLayoutItem);
         }
