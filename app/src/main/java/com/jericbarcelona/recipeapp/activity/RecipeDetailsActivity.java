@@ -23,7 +23,6 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -134,6 +133,7 @@ public class RecipeDetailsActivity extends AppCompatActivity {
                             recipeDetails.setTypeUuid(typeUuid);
                             recipeDetails.setName(recipeName);
                             recipeDetails.setDescription(recipeDescription);
+                            daoSession.getRecipeDetailsDao().insert(recipeDetails);
 
                             if (cropped != null) {
                                 imageViewRecipe.setImageBitmap(cropped);
@@ -177,7 +177,7 @@ public class RecipeDetailsActivity extends AppCompatActivity {
                                     out.flush();
                                     out.close();
 
-                                    daoSession.getRecipeDetailsDao().insert(recipeDetails);
+                                    daoSession.getRecipeDetailsDao().update(recipeDetails);
 
                                 } catch (SecurityException se) {
                                     Log.e("Create Folder", se.toString());
@@ -359,12 +359,16 @@ public class RecipeDetailsActivity extends AppCompatActivity {
             textViewTypeName.setText(recipeDetailsItem.getName() == null ? "" : recipeDetailsItem.getName());
             textViewDescription.setText(recipeDetailsItem.getDescription() == null ? "" : recipeDetailsItem.getDescription());
 
-            File recipeTypeImageFile = new File(AppConstants.EXTERNAL_STORAGE, recipeDetailsItem.getImageLocation());
-            if (recipeTypeImageFile.exists()) {
-                String imageUri = "file://" + recipeTypeImageFile.getAbsolutePath();
-                Util.imageLoader.displayImage(imageUri, imageViewTypeImage);
+            if(recipeDetailsItem.getImageLocation() != null && !recipeDetailsItem.getImageLocation().equals("")) {
+                File recipeTypeImageFile = new File(AppConstants.EXTERNAL_STORAGE, recipeDetailsItem.getImageLocation());
+                if (recipeTypeImageFile.exists()) {
+                    String imageUri = "file://" + recipeTypeImageFile.getAbsolutePath();
+                    Util.imageLoader.displayImage(imageUri, imageViewTypeImage);
+                }
+            } else {
+                Bitmap placeholder = BitmapFactory.decodeResource(getResources(), R.drawable.recipe_logo_sample);
+                imageViewTypeImage.setImageBitmap(placeholder);
             }
-
 
             buttonView.setOnClickListener(new View.OnClickListener() {
                 @Override

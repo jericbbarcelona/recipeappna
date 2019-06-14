@@ -74,10 +74,15 @@ public class RecipeChosenDetailsActivity extends AppCompatActivity {
             textViewName.setText(recipeDetailsItem.getName());
             textViewDescription.setText(recipeDetailsItem.getDescription());
 
-            File recipeTypeImageFile = new File(AppConstants.EXTERNAL_STORAGE, recipeDetailsItem.getImageLocation());
-            if (recipeTypeImageFile.exists()) {
-                String imageUri = "file://" + recipeTypeImageFile.getAbsolutePath();
-                Util.imageLoader.displayImage(imageUri, imageViewRecipe);
+            if(recipeDetailsItem.getImageLocation() != null && !recipeDetailsItem.getImageLocation().equals("")) {
+                File recipeTypeImageFile = new File(AppConstants.EXTERNAL_STORAGE, recipeDetailsItem.getImageLocation());
+                if (recipeTypeImageFile.exists()) {
+                    String imageUri = "file://" + recipeTypeImageFile.getAbsolutePath();
+                    Util.imageLoader.displayImage(imageUri, imageViewRecipe);
+                } else {
+                    Bitmap placeholder = BitmapFactory.decodeResource(getResources(), R.drawable.recipe_logo_sample);
+                    imageViewRecipe.setImageBitmap(placeholder);
+                }
             } else {
                 Bitmap placeholder = BitmapFactory.decodeResource(getResources(), R.drawable.recipe_logo_sample);
                 imageViewRecipe.setImageBitmap(placeholder);
@@ -150,10 +155,15 @@ public class RecipeChosenDetailsActivity extends AppCompatActivity {
                     editTextRecipeName.setText(recipeDetailsItem.getName());
                     editTextDescription.setText(recipeDetailsItem.getDescription());
 
-                    File recipeTypeImageFile = new File(AppConstants.EXTERNAL_STORAGE, recipeDetailsItem.getImageLocation());
-                    if (recipeTypeImageFile.exists()) {
-                        String imageUri = "file://" + recipeTypeImageFile.getAbsolutePath();
-                        Util.imageLoader.displayImage(imageUri, imageViewRecipe);
+                    if(recipeDetailsItem.getImageLocation() != null && !recipeDetailsItem.getImageLocation().equals("")) {
+                        File recipeTypeImageFile = new File(AppConstants.EXTERNAL_STORAGE, recipeDetailsItem.getImageLocation());
+                        if (recipeTypeImageFile.exists()) {
+                            String imageUri = "file://" + recipeTypeImageFile.getAbsolutePath();
+                            Util.imageLoader.displayImage(imageUri, imageViewRecipe);
+                        } else {
+                            Bitmap placeholder = BitmapFactory.decodeResource(getResources(), R.drawable.recipe_logo_sample);
+                            imageViewRecipe.setImageBitmap(placeholder);
+                        }
                     } else {
                         Bitmap placeholder = BitmapFactory.decodeResource(getResources(), R.drawable.recipe_logo_sample);
                         imageViewRecipe.setImageBitmap(placeholder);

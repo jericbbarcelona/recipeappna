@@ -22,7 +22,7 @@
             android:adjustViewBounds="true"
             android:layout_marginTop="@null"
             android:layout_weight="30"
-            android:background="@color/colorAccent"
+            android:background="@null"
             android:layout_gravity="center" />
 
         <LinearLayout
