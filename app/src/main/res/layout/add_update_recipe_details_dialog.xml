@@ -4,6 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
+    android:weightSum="100"
     android:orientation="vertical">
 
     <LinearLayout
@@ -52,6 +53,7 @@
     </LinearLayout>
 
     <ScrollView
+        android:id="@+id/scrollView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="9">
@@ -60,9 +62,9 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_gravity="center"
+            android:layout_marginTop="20dp"
             android:orientation="vertical"
             android:padding="10dp"
-            android:layout_marginTop="20dp"
             android:weightSum="100">
 
             <ImageView
@@ -82,9 +84,9 @@
                     android:id="@+id/editTextRecipeName"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
+                    android:layout_marginBottom="10dp"
                     android:background="@drawable/shape_sharp_corners_lightgray"
                     android:hint="Recipe Name"
-                    android:layout_marginBottom="10dp"
                     android:inputType="textCapWords"
                     android:padding="5dp"
                     android:paddingTop="10dp"
@@ -103,11 +105,11 @@
                     android:id="@+id/editTextDescription"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
+                    android:layout_marginBottom="10dp"
                     android:background="@drawable/shape_sharp_corners_lightgray"
                     android:hint="Recipe Description"
                     android:inputType="textCapWords"
                     android:padding="5dp"
-                    android:layout_marginBottom="10dp"
                     android:paddingTop="10dp"
                     android:textColorHint="#E0E0E0"
                     android:textSize="15sp"
@@ -118,28 +120,28 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center"
                 android:layout_marginTop="10dp"
                 android:orientation="horizontal"
-                android:layout_gravity="center"
                 android:weightSum="100">
 
                 <android.support.design.widget.TextInputLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:gravity="center"
                     android:layout_marginRight="5dp"
-                    android:layout_weight="20">
+                    android:layout_weight="20"
+                    android:gravity="center">
 
                     <EditText
                         android:id="@+id/editTextAddIngredients"
                         android:layout_width="match_parent"
                         android:layout_height="50dp"
+                        android:layout_marginBottom="10dp"
                         android:background="@drawable/shape_sharp_corners_lightgray"
                         android:hint="Add Ingredients"
                         android:inputType="textCapWords"
                         android:padding="5dp"
                         android:paddingTop="10dp"
-                        android:layout_marginBottom="10dp"
                         android:textColorHint="#E0E0E0"
                         android:textSize="15sp"
                         android:translationY="5dp" />
@@ -152,15 +154,15 @@
                     android:layout_height="50dp"
                     android:layout_marginLeft="5dp"
                     android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp"
                     android:layout_weight="80"
                     android:background="@drawable/button_click_view_details"
                     android:gravity="center"
                     android:inputType="textCapWords"
                     android:text="Add"
-                    android:translationY="5dp"
-                    android:layout_marginBottom="10dp"
                     android:textColor="@color/white"
-                    android:textSize="13sp" />
+                    android:textSize="13sp"
+                    android:translationY="5dp" />
 
             </LinearLayout>
 
@@ -190,12 +192,12 @@
                         android:id="@+id/editTextAddStep"
                         android:layout_width="match_parent"
                         android:layout_height="50dp"
+                        android:layout_marginBottom="10dp"
                         android:background="@drawable/shape_sharp_corners_lightgray"
                         android:hint="Add Step"
                         android:inputType="textCapWords"
                         android:padding="5dp"
                         android:paddingTop="10dp"
-                        android:layout_marginBottom="10dp"
                         android:textColorHint="#E0E0E0"
                         android:textSize="15sp"
                         android:translationY="5dp" />
@@ -213,9 +215,9 @@
                     android:gravity="center"
                     android:inputType="textCapWords"
                     android:text="Add"
-                    android:translationY="5dp"
                     android:textColor="@color/white"
-                    android:textSize="13sp" />
+                    android:textSize="13sp"
+                    android:translationY="5dp" />
 
             </LinearLayout>
 

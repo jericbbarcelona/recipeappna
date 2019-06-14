@@ -10,6 +10,7 @@ import android.content.res.AssetManager;
 import android.net.Uri;
 import android.os.Parcelable;
 import android.provider.MediaStore;
+import android.view.inputmethod.InputMethodManager;
 
 import com.jericbarcelona.recipeapp.App;
 import com.jericbarcelona.recipeapp.AppConstants;
@@ -299,5 +300,10 @@ public class Util {
         while ((read = in.read(buffer)) != -1) {
             out.write(buffer, 0, read);
         }
+    }
+
+    public static void hideSoftKeyboard(Activity activity) {
+        InputMethodManager inputMethodManager = (InputMethodManager) activity.getSystemService(Activity.INPUT_METHOD_SERVICE);
+        inputMethodManager.hideSoftInputFromWindow(activity.getCurrentFocus().getWindowToken(), 0);
     }
 }

@@ -17,11 +17,13 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -97,8 +99,9 @@ public class RecipeDetailsActivity extends AppCompatActivity {
                 final Dialog dialogBuilder = new Dialog(RecipeDetailsActivity.this);
                 dialogBuilder.requestWindowFeature(Window.FEATURE_NO_TITLE);
                 dialogBuilder.setContentView(R.layout.add_update_recipe_details_dialog);
+                dialogBuilder.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
                 Window window = dialogBuilder.getWindow();
-                window.setLayout(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);
+                window.setLayout(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
                 dialogBuilder.setCancelable(false);
                 dialogBuilder.show();
 
@@ -321,7 +324,7 @@ public class RecipeDetailsActivity extends AppCompatActivity {
             LinearLayout linearLayoutItem = (LinearLayout) getLayoutInflater().inflate(R.layout.instruction_item, null);
             TextView textView = linearLayoutItem.findViewById(R.id.textViewValue);
 
-            textView.setText("* " + item);
+            textView.setText(item);
 
             linearLayout.addView(linearLayoutItem);
         }
@@ -360,9 +363,6 @@ public class RecipeDetailsActivity extends AppCompatActivity {
             if (recipeTypeImageFile.exists()) {
                 String imageUri = "file://" + recipeTypeImageFile.getAbsolutePath();
                 Util.imageLoader.displayImage(imageUri, imageViewTypeImage);
-            } else {
-                Bitmap placeholder = BitmapFactory.decodeResource(getResources(), R.drawable.recipe_logo_sample);
-                imageViewTypeImage.setImageBitmap(placeholder);
             }
 
 

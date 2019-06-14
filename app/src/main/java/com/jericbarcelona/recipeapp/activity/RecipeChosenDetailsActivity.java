@@ -9,6 +9,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -125,6 +126,7 @@ public class RecipeChosenDetailsActivity extends AppCompatActivity {
                 final Dialog dialogBuilder = new Dialog(RecipeChosenDetailsActivity.this);
                 dialogBuilder.requestWindowFeature(Window.FEATURE_NO_TITLE);
                 dialogBuilder.setContentView(R.layout.add_update_recipe_details_dialog);
+                dialogBuilder.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
                 Window window = dialogBuilder.getWindow();
                 window.setLayout(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);
                 dialogBuilder.setCancelable(false);
